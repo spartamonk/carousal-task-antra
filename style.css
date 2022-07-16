@@ -8,6 +8,7 @@
 
 html {
   font-size: 100%;
+  scroll-behavior: smooth;
 } /*16px*/
 :root {
   /* colors */
@@ -218,6 +219,7 @@ ul {
   margin-top: 0px;
   min-width: 100%;
   scroll-snap-type: x mandatory;
+   scroll-behavior: smooth;
 }
 #movies-container::-webkit-scrollbar {
   display: none;
@@ -242,6 +244,7 @@ ul {
   width: 2rem;
   border-radius: 50%;
   background: var(--white);
+ 
 }
 .btn:hover {
   box-shadow: var(--shadow-3);
@@ -264,4 +267,7 @@ ul {
   top: 50%;
   position: absolute;
   z-index: 9999;
+}
+.btn-hidden{
+  visibility: hidden;
 }

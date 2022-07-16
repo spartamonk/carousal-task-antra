@@ -37,6 +37,7 @@ const View = (() => {
           </article>
       `
     })
+
     return tmp
   }
 
@@ -88,7 +89,22 @@ const Model = ((api, view) => {
 //* ~~~~~~~~~~~~~~~~~~~~~ Controller ~~~~~~~~~~~~~~~~~~~~~
 const Controller = ((model) => {
   const state = new model.State()
+  // slider
 
+  const slider = document.querySelector('#movies-container')
+  const btnLeft = document.querySelector('.btn-left')
+  const btnRight = document.querySelector('.btn-right')
+
+
+  btnLeft.addEventListener('click', () => {
+    console.log(slider.scrollLeft)
+    slider.scrollLeft -= 300
+  })
+
+  btnRight.addEventListener('click', () => {
+    slider.scrollLeft += 300
+   
+  })
   const init = () => {
     model.fetchMovies().then((movies) => {
       state.movielist = [...movies]
@@ -102,4 +118,5 @@ const Controller = ((model) => {
   return { bootstrap }
 })(Model, View)
 
-Controller.bootstrap()
+
+  Controller.bootstrap()
