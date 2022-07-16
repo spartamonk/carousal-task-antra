@@ -98,36 +98,44 @@ const Model = ((api, view) => {
   return {
     fetchMovies,
     State,
+    Movie,
   }
 })(Api, View)
 
 //* ~~~~~~~~~~~~~~~~~~~~~ Controller ~~~~~~~~~~~~~~~~~~~~~
 const Controller = ((model) => {
   const state = new model.State()
-  const slider = document.querySelector('#movies-container')
-  const btnLeft = document.querySelector('.btn-left')
-  const btnRight = document.querySelector('.btn-right')
-  const loader = document.querySelector('.loading')
-  
+  const getElement = (ele) => {
+    const element = document.querySelector(ele)
+    if (element) {
+      return element
+    } else {
+      throw new Error(`Element selection ${ele} does not exist`)
+    }
+  }
+  const slider = getElement('#movies-container')
+  const btnLeft = getElement('.btn-left')
+  const btnRight = getElement('.btn-right')
+  const loader = getElement('.loading')
+
   // slider
   const init = () => {
     state.loadingstatus = true
+    slider.style.visibility = 'none'
+    loader.style.display = 'block'
+
     model.fetchMovies().then((movies) => {
       state.movielist = [...movies]
       state.loadingstatus = false
     })
-
-    slider.style.display = 'none'
-    btnLeft.style.display = 'none'
-    btnRight.style.display = 'none'
-    loader.style.display = 'block'
-
+    btnLeft.classList.add('btn-hidden')
     btnLeft.addEventListener('click', () => {
       slider.scrollLeft -= 300
     })
     btnRight.addEventListener('click', () => {
       slider.scrollLeft += 300
     })
+
     slider.addEventListener('scroll', () => {
       if (slider.scrollLeft <= 0) {
         btnLeft.classList.add('btn-hidden')
@@ -145,10 +153,10 @@ const Controller = ((model) => {
   const disableLoader = () => {
     if (state.loadingstatus) return
     slider.style.display = 'flex'
+    loader.style.display = 'none'
     btnLeft.style.display = 'inline'
     btnRight.style.display = 'inline'
-    loader.style.display = 'none'
-
+    btnRight.classList.remove('btn-loading')
     state.updatestatus = false
   }
   const bootstrap = () => {

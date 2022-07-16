@@ -110,6 +110,7 @@ ul {
     transform: rotate(360deg);
   }
 }
+
 .loading {
   width: 6rem;
   height: 6rem;
@@ -119,7 +120,7 @@ ul {
   animation: spinner 0.6s linear infinite;
 }
 .loading {
-  margin: 0 auto;
+  margin: 5rem auto;
 }
 /* title */
 .title {
@@ -237,6 +238,7 @@ ul {
   border-radius: 50%;
   background: var(--white);
   color: #797979;
+  display: none;
 }
 .btn:hover {
   box-shadow: var(--shadow-3);
@@ -246,21 +248,24 @@ ul {
 }
 .btn-left {
   left: 0;
-  z-index: 9999;
+  z-index: 2;
   top: 50%;
   transform: translate(-50%, -50%);
   position: absolute;
+ 
 }
 .btn-right {
   right: 0;
   transform: translate(50%, -50%);
   top: 50%;
   position: absolute;
-  z-index: 9999;
+  z-index: 2;
+  
 }
 .btn-hidden {
-  visibility: hidden !important;
+  visibility: hidden;
 }
-.btn span{
+.btn span {
   font-size: 12px;
 }
+
