@@ -91,32 +91,39 @@ const Controller = ((model) => {
   const state = new model.State()
   // slider
 
-  const slider = document.querySelector('#movies-container')
-  const btnLeft = document.querySelector('.btn-left')
-  const btnRight = document.querySelector('.btn-right')
-
-
-  btnLeft.addEventListener('click', () => {
-    console.log(slider.scrollLeft)
-    slider.scrollLeft -= 300
-  })
-
-  btnRight.addEventListener('click', () => {
-    slider.scrollLeft += 300
-   
-  })
   const init = () => {
     model.fetchMovies().then((movies) => {
       state.movielist = [...movies]
     })
-  }
+    const slider = document.querySelector('#movies-container')
+    const btnLeft = document.querySelector('.btn-left')
+    const btnRight = document.querySelector('.btn-right')
 
+    btnLeft.addEventListener('click', () => {
+      slider.scrollLeft -= 300
+    })
+
+    btnRight.addEventListener('click', () => {
+      slider.scrollLeft += 300
+    })
+
+    slider.addEventListener('scroll', () => {
+      if (slider.scrollLeft <= 0) {
+        btnLeft.classList.add('btn-hidden')
+      } else {
+        btnLeft.classList.remove('btn-hidden')
+        if (slider.scrollWidth - 1 <= slider.offsetWidth + slider.scrollLeft) {
+          btnRight.classList.add('btn-hidden')
+        } else {
+          btnRight.classList.remove('btn-hidden')
+        }
+      }
+    })
+  }
   const bootstrap = () => {
     init()
   }
-
   return { bootstrap }
 })(Model, View)
 
-
-  Controller.bootstrap()
+Controller.bootstrap()
