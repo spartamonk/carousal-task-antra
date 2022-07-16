@@ -11,16 +11,6 @@ html {
   scroll-behavior: smooth;
 } /*16px*/
 :root {
-  /* colors */
-  --primary-100: #daeff8;
-  --primary-200: #b6dff1;
-  --primary-300: #91ceea;
-  --primary-400: #6dbee3;
-  --primary-500: #48aedc;
-  --primary-600: #3a8bb0;
-  --primary-700: #2b6884;
-  --primary-800: #1d4658;
-  --primary-900: #0e232c;
   /* grey */
   --grey-50: #f8fafc;
   --grey-100: #f1f5f9;
@@ -64,45 +54,36 @@ body {
   line-height: 1.75;
   color: var(--textColor);
 }
-
 p {
   max-width: 40em;
 }
-
 h1,
 h2,
 h3,
 h4,
 h5 {
   margin: 0;
-  margin-bottom: 1.38rem;
   font-family: var(--headingFont);
   font-weight: 400;
   line-height: 1.3;
   text-transform: capitalize;
 }
-
 h1 {
   margin-top: 0;
-  font-size: 3.052rem;
+  font-size: 3rem;
 }
-
 h2 {
   font-size: 2.441rem;
 }
-
 h3 {
   font-size: 1.953rem;
 }
-
 h4 {
   font-size: 1.563rem;
 }
-
 h5 {
   font-size: 1.25rem;
 }
-
 small,
 .text-small {
   font-size: var(--smallText);
@@ -173,8 +154,6 @@ ul {
 .movie-card {
   padding-bottom: 4rem;
   margin-bottom: 1rem;
-  background: #28a745;
-
   border-radius: 4px;
   border-width: 0px 0px;
   max-width: 80%;
@@ -184,11 +163,22 @@ ul {
   scroll-snap-align: start;
   scroll-snap-stop: always;
   max-width: 25rem;
-  background-image: linear-gradient(to bottom, #28a745, #1c8338, #14602b, #0e3f1d, #08210e);
+  background: #28a745;
+  background-image: linear-gradient(
+    to bottom,
+    #28a745,
+    #1c8338,
+    #14602b,
+    #0e3f1d,
+    #08210e
+  );
 }
 @media screen and (min-width: 774px) {
   .movie-card {
     max-width: calc(100% / 4);
+  }
+  h1 {
+    text-align: center;
   }
 }
 .img-container {
@@ -228,8 +218,8 @@ ul {
 }
 .container {
   position: relative;
-  margin-top: 40px;
-  margin-bottom: 40px;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
 }
 .btn {
   cursor: pointer;
@@ -249,12 +239,11 @@ ul {
   color: #797979;
 }
 .btn:hover {
-  box-shadow: var(--shadow-4);
+  box-shadow: var(--shadow-3);
 }
 .btn-block {
   width: 100%;
 }
-
 .btn-left {
   left: 0;
   z-index: 9999;
@@ -262,7 +251,6 @@ ul {
   transform: translate(-50%, -50%);
   position: absolute;
 }
-
 .btn-right {
   right: 0;
   transform: translate(50%, -50%);
@@ -272,4 +260,7 @@ ul {
 }
 .btn-hidden {
   visibility: hidden !important;
+}
+.btn span{
+  font-size: 12px;
 }
