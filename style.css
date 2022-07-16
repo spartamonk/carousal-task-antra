@@ -116,7 +116,7 @@ ul {
   height: 6rem;
   border: 5px solid var(--grey-400);
   border-radius: 50%;
-  border-top-color: var(--primary-500);
+  border-top-color: var(--green-dark);
   animation: spinner 0.6s linear infinite;
 }
 .loading {
