@@ -117,13 +117,11 @@ const Controller = ((model) => {
   const btnLeft = getElement('.btn-left')
   const btnRight = getElement('.btn-right')
   const loader = getElement('.loading')
-
   // slider
   const init = () => {
     state.loadingstatus = true
     slider.style.visibility = 'none'
     loader.style.display = 'block'
-
     model.fetchMovies().then((movies) => {
       state.movielist = [...movies]
       state.loadingstatus = false
@@ -137,18 +135,15 @@ const Controller = ((model) => {
     })
 
     slider.addEventListener('scroll', () => {
-      if (slider.scrollLeft <= 0) {
-        btnLeft.classList.add('btn-hidden')
-      } else {
-        btnLeft.classList.remove('btn-hidden')
-      }
-      if (slider.scrollWidth - 1 <= slider.offsetWidth + slider.scrollLeft) {
-        btnRight.classList.add('btn-hidden')
-      } else {
-        btnRight.classList.remove('btn-hidden')
-      }
+      slider.scrollLeft <= 0
+        ? btnLeft.classList.add('btn-hidden')
+        : btnLeft.classList.remove('btn-hidden')
+      slider.scrollWidth <= slider.offsetWidth + slider.scrollLeft
+        ? btnRight.classList.add('btn-hidden')
+        : btnRight.classList.remove('btn-hidden')
     })
     // autoplay slider
+    
   }
   const disableLoader = () => {
     if (state.loadingstatus) return
@@ -156,7 +151,6 @@ const Controller = ((model) => {
     loader.style.display = 'none'
     btnLeft.style.display = 'inline'
     btnRight.style.display = 'inline'
-    btnRight.classList.remove('btn-loading')
     state.updatestatus = false
   }
   const bootstrap = () => {
