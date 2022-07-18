@@ -7,9 +7,8 @@ const View = (() => {
   const domstr = {
     moviesContainer: '#movies-container',
   }
-  const render = (ele, tmp) => {
-    ele.innerHTML = tmp
-  }
+  const render = (ele, tmp) => (ele.innerHTML = tmp)
+
   const createTmp = (arr) => {
     let tmp = ''
 
@@ -39,15 +38,6 @@ const View = (() => {
 
 //* ~~~~~~~~~~~~~~~~~~~~~ Model ~~~~~~~~~~~~~~~~~~~~~
 const Model = ((api, view) => {
-  class Movie {
-    constructor(id, imgUrl, name, outlineInfo) {
-      this.id = id
-      this.imgUrl = imgUrl
-      this.name = name
-      this.outlineInfo = outlineInfo
-    }
-  }
-
   class State {
     #movies = []
     #loading = true
@@ -86,7 +76,6 @@ const Model = ((api, view) => {
   return {
     fetchMovies,
     State,
-    Movie,
   }
 })(Api, View)
 
@@ -126,6 +115,7 @@ const Controller = ((model) => {
       slider.scrollLeft <= 0
         ? btnLeft.classList.add('btn-hidden')
         : btnLeft.classList.remove('btn-hidden')
+        
       slider.scrollWidth <= slider.offsetWidth + slider.scrollLeft
         ? btnRight.classList.add('btn-hidden')
         : btnRight.classList.remove('btn-hidden')
