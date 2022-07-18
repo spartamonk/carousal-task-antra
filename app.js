@@ -1,5 +1,7 @@
 // import Api
-import Api from './API/MoviesApi.js'
+import MoviesApi from './src/fetchMovies.js'
+// getElement
+import {getElement} from './src/utils.js'
 
 //* ~~~~~~~~~~~~~~~~~~~~~ View ~~~~~~~~~~~~~~~~~~~~~
 
@@ -99,19 +101,11 @@ const Model = ((api, view) => {
     fetchMovies,
     State,
   }
-})(Api, View)
+})(MoviesApi, View)
 
 //* ~~~~~~~~~~~~~~~~~~~~~ Controller ~~~~~~~~~~~~~~~~~~~~~
 const Controller = ((model) => {
   const state = new model.State()
-  const getElement = (ele) => {
-    const element = document.querySelector(ele)
-    if (element) {
-      return element
-    } else {
-      throw new Error(`Element selection ${ele} does not exist`)
-    }
-  }
 
   const slider = getElement('#movies-container')
   const { nextBtn, prevBtn } = state.buttons

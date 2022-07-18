@@ -1,9 +1,9 @@
-
 // // ##### Fetch data
-const rootUrl = 'http://localhost:4232/movies'
+import { moviesUrl } from './utils.js'
+
 const Api = (() => {
   const fetchMovies = () => {
-    return fetch(rootUrl).then((response) => {
+    return fetch(moviesUrl).then((response) => {
       return response.json()
     })
   }
