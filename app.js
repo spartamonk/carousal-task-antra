@@ -112,7 +112,7 @@ const Controller = ((model) => {
 
   const btnLeft = prevBtn
   const btnRight = nextBtn
-
+  
   const loader = getElement('.loading')
   // slider
   const init = () => {
@@ -136,7 +136,7 @@ const Controller = ((model) => {
         ? btnLeft.classList.add('btn-hidden')
         : btnLeft.classList.remove('btn-hidden')
 
-      slider.scrollWidth <= slider.offsetWidth + slider.scrollLeft
+      slider.scrollWidth <= slider.offsetWidth + slider.scrollLeft +1
         ? btnRight.classList.add('btn-hidden')
         : btnRight.classList.remove('btn-hidden')
     })
