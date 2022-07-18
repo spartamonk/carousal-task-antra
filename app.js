@@ -7,7 +7,10 @@ const View = (() => {
   const domstr = {
     moviesContainer: '#movies-container',
   }
-  const render = (ele, tmp) => (ele.innerHTML = tmp)
+  const container = document.querySelector('.container')
+  const render = (ele, tmp) => {
+    ele.innerHTML = tmp
+  }
 
   const createTmp = (arr) => {
     let tmp = ''
@@ -25,14 +28,28 @@ const View = (() => {
           </article>
       `
     })
-
     return tmp
+  }
+  const createBtns = () => {
+    const prevBtn = document.createElement('button')
+    const nextBtn = document.createElement('button')
+    prevBtn.innerHTML = `<span>&#60;</span>`
+    prevBtn.className = 'btn btn-left'
+    nextBtn.innerHTML = `<span>&#62;</span>`
+    nextBtn.className = 'btn btn-right'
+    container.insertBefore(prevBtn, container.firstChild)
+    container.insertBefore(nextBtn, container.lastChild)
+    return {
+      prevBtn,
+      nextBtn,
+    }
   }
 
   return {
     render,
     createTmp,
     domstr,
+    createBtns,
   }
 })()
 
@@ -40,6 +57,7 @@ const View = (() => {
 const Model = ((api, view) => {
   class State {
     #movies = []
+    #btns = view.createBtns()
     #loading = true
     #update = true
 
@@ -55,6 +73,10 @@ const Model = ((api, view) => {
       view.render(moviesContainer, tmp)
       this.#loading = false
     }
+    get buttons() {
+      return this.#btns
+    }
+
     get loadingstatus() {
       return this.#loading
     }
@@ -90,9 +112,13 @@ const Controller = ((model) => {
       throw new Error(`Element selection ${ele} does not exist`)
     }
   }
+
   const slider = getElement('#movies-container')
-  const btnLeft = getElement('.btn-left')
-  const btnRight = getElement('.btn-right')
+  const { nextBtn, prevBtn } = state.buttons
+
+  const btnLeft = prevBtn
+  const btnRight = nextBtn
+
   const loader = getElement('.loading')
   // slider
   const init = () => {
@@ -115,7 +141,7 @@ const Controller = ((model) => {
       slider.scrollLeft <= 0
         ? btnLeft.classList.add('btn-hidden')
         : btnLeft.classList.remove('btn-hidden')
-        
+
       slider.scrollWidth <= slider.offsetWidth + slider.scrollLeft
         ? btnRight.classList.add('btn-hidden')
         : btnRight.classList.remove('btn-hidden')
@@ -138,6 +164,6 @@ const Controller = ((model) => {
     }
   }
   return { bootstrap }
-})(Model)
+})(Model, View)
 
 Controller.bootstrap()
