@@ -1,16 +1,5 @@
-// // ##### Fetch data
-const rootUrl = 'http://localhost:4232/movies'
-
-const Api = (() => {
-  const fetchMovies = () => {
-    return fetch(rootUrl).then((response) => {
-      return response.json()
-    })
-  }
-  return {
-    fetchMovies,
-  }
-})()
+// import Api
+import Api from './API/MoviesApi.js'
 
 //* ~~~~~~~~~~~~~~~~~~~~~ View ~~~~~~~~~~~~~~~~~~~~~
 
@@ -74,7 +63,6 @@ const Model = ((api, view) => {
       )
       const tmp = view.createTmp(this.#movies)
       view.render(moviesContainer, tmp)
-
       this.#loading = false
     }
     get loadingstatus() {
@@ -143,7 +131,6 @@ const Controller = ((model) => {
         : btnRight.classList.remove('btn-hidden')
     })
     // autoplay slider
-    
   }
   const disableLoader = () => {
     if (state.loadingstatus) return
@@ -161,6 +148,6 @@ const Controller = ((model) => {
     }
   }
   return { bootstrap }
-})(Model, View)
+})(Model)
 
 Controller.bootstrap()
